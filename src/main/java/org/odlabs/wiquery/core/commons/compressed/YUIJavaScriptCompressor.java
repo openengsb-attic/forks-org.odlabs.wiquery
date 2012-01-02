@@ -1,10 +1,16 @@
 package org.odlabs.wiquery.core.commons.compressed;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+
 import org.apache.wicket.javascript.IJavascriptCompressor;
 import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
 /**
  * Wicket Javascript Compressor implementation which compresses Javascript using
@@ -16,11 +22,47 @@ public class YUIJavaScriptCompressor implements IJavascriptCompressor {
 	private static final Logger log = LoggerFactory
 			.getLogger(YUIJavaScriptCompressor.class);
 
+	/** Wrapper to let JavaScript parser report his errors, avoids nullpointers */
+	private static final ErrorReporter logWrap = new ErrorReporter() {
+		public void error(String arg0, String arg1, int arg2, String arg3,
+				int arg4) {
+			log.error(arg0);
+		}
+
+		public EvaluatorException runtimeError(String arg0, String arg1,
+				int arg2, String arg3, int arg4) {
+			return new EvaluatorException(arg0, arg1, arg2, arg3, arg4);
+		}
+
+		public void warning(String arg0, String arg1, int arg2, String arg3,
+				int arg4) {
+			log.warn(arg0);
+		}
+	};
+
 	public String compress(String original) {
-		log.info("would compress javascript, but the implementation has been removed");
-		// disable this compressor. It does not work with OSGi because the
-		// implementation depends on classes private to
-		// org.mozilla.javascript-package
-		return original;
+		long startTime = System.currentTimeMillis();
+		StringReader originalJsReader = new StringReader(original);
+		StringWriter compressedJs = new StringWriter();
+		try {
+			JavaScriptCompressor compressor = new JavaScriptCompressor(
+					originalJsReader, logWrap);
+			compressor.compress(compressedJs, -1, true, false, true, false);
+			compressedJs.flush();
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+			return original;
+		} catch (RuntimeException e) {
+			if (e.getMessage() == null || e.getMessage().trim().isEmpty())
+				log.error("Failed to compress javascript, no reason was given.");
+			else
+				log.error(e.getMessage(), e);
+
+			return original;
+		}
+
+		long endTime = System.currentTimeMillis();
+		log.debug("Compressed JS in "+(endTime-startTime)+" ms.");
+		return compressedJs.toString();
 	}
 }

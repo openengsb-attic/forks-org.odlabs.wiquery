@@ -178,6 +178,7 @@
 						<Import-Package>
                             !org.odlabs.wiquery*,
                             !com.yahoo.platform.yui.compressor*,
+                            !org.mozilla.javascript*,
                             org.codehaus.jackson*;version="${jackson.version}",
                             org.apache.wicket*;version="${wicket.version}",
                             org.slf4j*version="${slf4j.version}",
@@ -186,6 +187,7 @@
 						<Export-Package>
                             org.odlabs.wiquery*,
                             com.yahoo.platform.yui.compressor*,
+                            org.mozilla.javascript*
 						</Export-Package>
 					</instructions>
 				</configuration>
