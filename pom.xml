@@ -34,7 +34,7 @@
 		<maven-buildnumber-plugin.version>1.0</maven-buildnumber-plugin.version>
 		<maven-bundle-plugin.version>2.3.4</maven-bundle-plugin.version>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-		<maven-eclipse-plugin.version>2.9-SNAPSHOT</maven-eclipse-plugin.version>
+		<maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
 		<maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>2.8</maven-javadoc-plugin.version>
 		<maven-source-plugin.version>2.1.2</maven-source-plugin.version>
