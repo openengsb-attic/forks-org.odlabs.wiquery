@@ -11,7 +11,7 @@
   <groupId>org.openengsb.forks</groupId>
 	<artifactId>org.odlabs.wiquery</artifactId>
 	<packaging>jar</packaging>
-	<version>1.2.4.w1</version>
+	<version>1.2.5.w1-SNAPSHOT</version>
 	<name>WiQuery (for OpenEngSB)</name>
 
 	<scm>
