@@ -16,9 +16,9 @@
 	<name>WiQuery (for OpenEngSB)</name>
 
 	<scm>
-		<connection>scm:git:git://github.com/openengsb/org.odlabs.wiquery.git</connection>
-		<developerConnection>scm:git:git@github.com:openengsb/org.odlabs.wiquery.git</developerConnection>
-		<url>http://github.com/openengsb/org.odlabs.wiquery</url>
+		<connection>scm:git:git://github.com/openengsb/forks-org.odlabs.wiquery.git</connection>
+		<developerConnection>scm:git:git@github.com:openengsb/forks-org.odlabs.wiquery.git</developerConnection>
+		<url>http://github.com/openengsb/forks-org.odlabs.wiquery</url>
 	</scm>
 
 	<properties>
