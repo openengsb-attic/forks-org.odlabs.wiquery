@@ -12,33 +12,33 @@ import org.apache.wicket.behavior.IBehavior;
  * 
  * @author Richard Wilkinson
  * @author Hielke Hoeve
- *
+ * 
  */
-class WiQueryRenderingListener implements IComponentOnBeforeRenderListener {
+public class WiQueryRenderingListener implements IComponentOnBeforeRenderListener {
 
-	public static final MetaDataKey<Boolean> WI_QUERY_RENDERED = new MetaDataKey<Boolean>() {
-		private static final long serialVersionUID = 1L;
-	};
-	
-	WiQueryRenderingListener() {
-	}
-	
-	public void onBeforeRender(Component component) {
-		Boolean wiQueryRendered = component.getMetaData(WI_QUERY_RENDERED);
-		if (wiQueryRendered == null || !wiQueryRendered) {
-			if (component instanceof IWiQueryPlugin) {
-				// binding component as a plugin
-				component.add(new HeaderContributor(new WiQueryCoreHeaderContributor(component)));
-			}
-			else{
-				for (IBehavior curBehavior : component.getBehaviors()) {
-					if (curBehavior instanceof IWiQueryPlugin) {
-						component.add(new HeaderContributor(new WiQueryCoreHeaderContributor(component)));
-						break;
-					}
-				}
-			}
-		}
-	}
+    public static final MetaDataKey<Boolean> WI_QUERY_RENDERED = new MetaDataKey<Boolean>() {
+        private static final long serialVersionUID = 1L;
+    };
+
+    public WiQueryRenderingListener() {
+    }
+
+    public void onBeforeRender(Component component) {
+        Boolean wiQueryRendered = component.getMetaData(WI_QUERY_RENDERED);
+        if (wiQueryRendered == null || !wiQueryRendered) {
+            if (component instanceof IWiQueryPlugin) {
+                // binding component as a plugin
+                component.add(new HeaderContributor(new WiQueryCoreHeaderContributor(component)));
+            }
+            else {
+                for (IBehavior curBehavior : component.getBehaviors()) {
+                    if (curBehavior instanceof IWiQueryPlugin) {
+                        component.add(new HeaderContributor(new WiQueryCoreHeaderContributor(component)));
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
 }
